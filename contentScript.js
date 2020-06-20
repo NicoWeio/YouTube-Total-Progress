@@ -103,7 +103,7 @@ function formatTime(s) {
 
   hours = Math.floor(s / 3600);
   s %= 3600;
-  minutes = Math.floor(s / 60);
-  seconds = Math.floor(s % 60);
+  minutes = ('0' + Math.floor(s / 60)).slice(-2);
+  seconds = ('0' + Math.floor(s % 60)).slice(-2);
   return [hours, minutes, seconds].join(':');
 }
