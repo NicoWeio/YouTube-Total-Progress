@@ -1,0 +1,10 @@
+{
+  "name": "AbsoluteProgress for YouTube",
+  "version": "1.0",
+  "description": "Displays the total length of a playlist and the remaining time.",
+  "manifest_version": 2,
+  "content_scripts": [{
+    "matches": ["https://*.youtube.com/playlist*"],
+    "js": ["contentScript.js"]
+  }]
+}
