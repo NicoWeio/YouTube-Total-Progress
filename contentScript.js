@@ -47,15 +47,23 @@ function main() {
   let totalTime = videos.reduce((acc, video) => acc + video.duration, 0);
   let remainingTime = videos.reduce((acc, video) => acc + video.duration * (1 - video.progress), 0);
 
+  let remainingSinceLast = 0;
+  for (let v of videos.reverse()) {
+    if (v.progress !== 0) break;
+    else remainingSinceLast += (v.duration * (1 - v.progress));
+  }
+
   let statsEl = document.querySelector('#stats');
   // statsEl.innerHTML = `<yt-formatted-string class="style-scope ytd-playlist-sidebar-primary-info-renderer">Insgesamt ${totalTime}</yt-formatted-string>`;
   // statsEl.innerHTML += `<p class="style-scope ytd-playlist-sidebar-primary-info-renderer">Insgesamt ${formatTime(totalTime)}</p>`;
 
+  let newContent = `<p id="yt-total-stats">Insgesamt: ${formatTime(totalTime)}<br>Übrig: ${formatTime(remainingTime)}<br>Übrig ab letztem gesehenen: ${formatTime(remainingSinceLast)}</p>`;
+
   if (document.querySelector('#yt-total-stats')) {
-    document.querySelector('#yt-total-stats').innerHTML = `<p id="yt-total-stats">Insgesamt: ${formatTime(totalTime)}<br>Übrig: ${formatTime(remainingTime)}</p>`;
+    document.querySelector('#yt-total-stats').innerHTML = newContent;
   } else {
     let myEl = document.createElement('p');
-    myEl.innerHTML = `<p id="yt-total-stats">Insgesamt: ${formatTime(totalTime)}<br>Übrig: ${formatTime(remainingTime)}</p>`;
+    myEl.innerHTML = newContent;
     statsEl.appendChild(myEl);
   }
 }
