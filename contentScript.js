@@ -49,8 +49,9 @@ function main() {
 
   let remainingSinceLast = 0;
   for (let v of videos.reverse()) {
-    if (v.progress !== 0) break;
-    else remainingSinceLast += (v.duration * (1 - v.progress));
+    remainingSinceLast += (v.duration * (1 - v.progress));
+    if (v.progress !== 0)
+      break;
   }
 
   let statsEl = document.querySelector('#stats');
